@@ -101,7 +101,7 @@ cordova.plugins.Recaptcha.verify(onSuccess, onFailure, args);
 
 # Changelog
 
-### 1.0.0
+### 1.0.1
 
 - First version
 - Tested on Android 4.4 and up

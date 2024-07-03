@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="cordova-plugin-recaptcha-enterprise" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-recaptcha-enterprise" version="1.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Recaptcha Enterprise</name>
     <description>A cordova plugin for the reCAPTCHA Enterprise API</description>
     <author>Andres Zsögön</author>

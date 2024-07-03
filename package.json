@@ -1,6 +1,6 @@
 {
     "name": "cordova-plugin-recaptcha-enterprise",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A cordova plugin for the reCAPTCHA Enterprise Android and Web API",
     "cordova": {
         "id": "cordova-plugin-recaptcha-enterprise",
@@ -23,7 +23,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/andreszs/cordova-plugin-recaptcha-enterprise.git"
+        "url": "git+https://github.com/andreszs/cordova-plugin-recaptcha-enterprise.git"
     },
     "keywords": [
         "ecosystem:cordova",
