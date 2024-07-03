@@ -1,0 +1,40 @@
+{
+    "name": "cordova-plugin-recaptcha-enterprise",
+    "version": "1.0.0",
+    "description": "A cordova plugin for the reCAPTCHA Enterprise Android and Web API",
+    "cordova": {
+        "id": "cordova-plugin-recaptcha-enterprise",
+        "platforms": [
+            "android",
+            "browser"
+        ]
+    },
+    "engines": {
+        "cordovaDependencies": {
+            "1.0.0": {
+                "cordova": ">=10.0.0",
+                "cordova-android": ">=8.0.0"
+            }
+        }
+    },
+    "main": "www/recaptcha.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andreszs/cordova-plugin-recaptcha-enterprise.git"
+    },
+    "keywords": [
+        "ecosystem:cordova",
+        "cordova-android",
+        "cordova",
+        "recaptcha"
+    ],
+    "bugs": {
+        "url": "https://github.com/andreszs/cordova-plugin-recaptcha-enterprise/issues"
+    },
+    "homepage": "https://github.com/andreszs/cordova-plugin-recaptcha-enterprise",
+    "author": "Andres Zsögön",
+    "license": "MIT"
+}
