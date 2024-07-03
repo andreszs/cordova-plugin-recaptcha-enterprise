@@ -12,11 +12,11 @@ Cordova plugin to implement the score-based [Google reCAPTCHA Enterprise API](ht
 # Requirements
 
 - [Prepare your environment](https://cloud.google.com/recaptcha-enterprise/docs/prepare-environment "Prepare your environment") and enable reCAPTCHA Enterprise API
-- Create [score-based reCAPTCHA keys](https://cloud.google.com/recaptcha-enterprise/docs/keys "score-based reCAPTCHA keys") for [android](https://cloud.google.com/recaptcha-enterprise/docs/create-key-mobile "android") and [websites](https://cloud.google.com/recaptcha-enterprise/docs/create-key-website "websites") in your[ Google Cloud console](https://console.cloud.google.com/security/recaptcha?orgonly=true&project=plugin-demo-1718371135488&supportedpurview=organizationId,folder,project " Google Cloud console")
+- Create [score-based reCAPTCHA keys](https://cloud.google.com/recaptcha-enterprise/docs/keys "score-based reCAPTCHA keys") for [android](https://cloud.google.com/recaptcha-enterprise/docs/create-key-mobile "android") and [websites](https://cloud.google.com/recaptcha-enterprise/docs/create-key-website "websites") in your [Google Cloud console](https://console.cloud.google.com/security/recaptcha?orgonly=true&project=plugin-demo-1718371135488&supportedpurview=organizationId,folder,project " Google Cloud console")
 
 # Installation
 
-| Plugin version | Cordova | cordova-android | minSdkVersion | [ReCaptcha](https://mvnrepository.com/artifact/com.google.android.recaptcha/recaptcha "recaptcha") |
+| Plugin version | Cordova | cordova-android | minSdkVersion | ReCaptcha |
 | --- | --- | --- | --- | --- |
 | 1.0.0 | >= 10.0.0 | >= 8.0.0 | 19 | 18.2.1 |
 
@@ -83,14 +83,14 @@ cordova.plugins.Recaptcha.verify(onSuccess, onFailure, args);
 # Remarks
 
 - Score-based keys do not display the *I'm not a robot* checkbox and never show CAPTCHA challenges
-- Score-based return a token which you must use to create an assessment that returns a risk score.
+- Score-based keys return a token which you must use to create an assessment that returns a risk score.
 - You cannot use Classic keys from the[ v3 Admin Console](https://www.google.com/recaptcha/admin " v3 Admin Console").
 - The website key (optional for browser platform) should be created with the **localhost** domain.
-- On certain devices, the first call to `verify()` could return [Internal Error](https://cloud.google.com/recaptcha-enterprise/docs/reference/android/com/google/android/recaptcha/RecaptchaErrorCode#INTERNAL_ERROR "Internal Error"). Retrying the operation will return a token.
+- On certain devices, the first call to `verify()` could return [Internal Error](https://cloud.google.com/recaptcha-enterprise/docs/reference/android/com/google/android/recaptcha/RecaptchaErrorCode#INTERNAL_ERROR "Internal Error").
 
 # Plugin demo app
 
-- [Compiled APK and reference](https://www.andreszsogon.com/cordova-recaptcha-enterprise-demo/)
+- [Compiled APK and reference](https://www.andreszsogon.com/com-andreszs-grecaptcha-demo/)
 - [Source code for www folder](https://github.com/andreszs/cordova-plugin-demos)
 
 #### android
