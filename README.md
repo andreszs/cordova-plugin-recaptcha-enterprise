@@ -18,7 +18,7 @@ Cordova plugin to implement the score-based [Google reCAPTCHA Enterprise API](ht
 
 | Plugin version | Cordova | cordova-android | minSdkVersion | ReCaptcha |
 | --- | --- | --- | --- | --- |
-| 1.0.0 | >= 10.0.0 | >= 8.0.0 | 19 | 18.2.1 |
+| 1.0.x | >= 10.0.0 | >= 8.0.0 | 19 | 18.2.1 |
 
 ### Install latest version from NPM
 
@@ -105,7 +105,7 @@ cordova.plugins.Recaptcha.verify(onSuccess, onFailure, args);
 
 # Changelog
 
-### 1.0.1
+### 1.0.0
 
 - First version
 - Tested on Android 4.4 and up
