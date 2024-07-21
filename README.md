@@ -1,74 +1,73 @@
-![npm](https://img.shields.io/npm/dt/cordova-plugin-hcaptcha) ![npm](https://img.shields.io/npm/v/cordova-plugin-hcaptcha) ![GitHub package.json version](https://img.shields.io/github/package-json/v/andreszs/cordova-plugin-hcaptcha?color=FF6D00&label=master&logo=github) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/andreszs/cordova-plugin-hcaptcha) ![GitHub top language](https://img.shields.io/github/languages/top/andreszs/cordova-plugin-hcaptcha) ![GitHub](https://img.shields.io/github/license/andreszs/cordova-plugin-hcaptcha) ![GitHub last commit](https://img.shields.io/github/last-commit/andreszs/cordova-plugin-hcaptcha)
+![npm](https://img.shields.io/npm/dt/cordova-plugin-recaptcha-enterprise) ![npm](https://img.shields.io/npm/v/cordova-plugin-recaptcha-enterprise) ![GitHub package.json version](https://img.shields.io/github/package-json/v/andreszs/cordova-plugin-recaptcha-enterprise?color=FF6D00&label=master&logo=github) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/andreszs/cordova-plugin-recaptcha-enterprise) ![GitHub top language](https://img.shields.io/github/languages/top/andreszs/cordova-plugin-recaptcha-enterprise) ![GitHub](https://img.shields.io/github/license/andreszs/cordova-plugin-recaptcha-enterprise) ![GitHub last commit](https://img.shields.io/github/last-commit/andreszs/cordova-plugin-recaptcha-enterprise)
 
-# cordova-plugin-hcaptcha
+# cordova-plugin-recaptcha-enterprise
 
-Cordova plugin for integrating the [hCaptcha](https://www.hcaptcha.com) challenge [Android SDK](https://github.com/hCaptcha/hcaptcha-android-sdk) and [web component API](https://docs.hcaptcha.com/invisible).
+Cordova plugin to implement the score-based [Google reCAPTCHA Enterprise API](https://cloud.google.com/recaptcha-enterprise/docs/overview "Google reCAPTCHA Enterprise API") on android and browser platforms.
 
 # Platforms
 
 - Android
 - Browser
 
+# Requirements
+
+- [Prepare your environment](https://cloud.google.com/recaptcha-enterprise/docs/prepare-environment "Prepare your environment") and enable reCAPTCHA Enterprise API
+- Create [score-based reCAPTCHA keys](https://cloud.google.com/recaptcha-enterprise/docs/keys "score-based reCAPTCHA keys") for [android](https://cloud.google.com/recaptcha-enterprise/docs/create-key-mobile "android") and [websites](https://cloud.google.com/recaptcha-enterprise/docs/create-key-website "websites") in your [Google Cloud console](https://console.cloud.google.com/security/recaptcha?orgonly=true&project=plugin-demo-1718371135488&supportedpurview=organizationId,folder,project " Google Cloud console")
+
 # Installation
 
-### Plugin Versions
-
-| Plugin version | Cordova | Cordova Android | hCaptcha |
-| --- | --- | --- | --- |
-| 1.0.x | >= 10.0.0 | >= 10.0.0 | 4.0.0 |
+| Plugin version | Cordova | cordova-android | minSdkVersion | ReCaptcha |
+| --- | --- | --- | --- | --- |
+| 1.0.0 | >= 10.0.0 | >= 8.0.0 | 19 | 18.2.1 |
 
 ### Install latest version from NPM
 
 ```bash
-  cordova plugin add cordova-plugin-hcaptcha
+  cordova plugin add cordova-plugin-recaptcha-enterprise
 ```
 
-### Install latest with custom [SDK](https://github.com/hCaptcha/hcaptcha-android-sdk/releases) version
+### Install latest version with custom [ReCaptcha](https://mvnrepository.com/artifact/com.google.android.recaptcha/recaptcha) version
 
 ```bash
-  cordova plugin add cordova-plugin-hcaptcha --variable HCAPTCHA_VERSION=4.0.0
+  cordova plugin add cordova-plugin-recaptcha-enterprise --variable RECAPTCHA_VERSION=18.2.1
 ```
 
 ### Install latest version from master
 
 ```bash
-  cordova plugin add https://github.com/andreszs/cordova-plugin-hcaptcha
+  cordova plugin add https://github.com/andreszs/cordova-plugin-recaptcha-enterprise
 ```
+⚠ Note that using ReCaptcha 18.5.0 or newer will enforce a minSdk level of 21.
 
 # Methods
 
 ## verify
 
-To invoke the hCaptcha API, you call the `verify()` method. Usually, this method corresponds to the user's selecting a UI element, such as a button, in your activity.
+To invoke the reCAPTCHA API, you call the `verify()` method. Usually, this method corresponds to the user's selecting a UI element, such as a button, in your activity.
 
 ```javascript
-cordova.plugins.Hcaptcha.verify(onSuccess, onFailure, [args])
+cordova.plugins.Recaptcha.verify(onSuccess, onFailure, [args])
 ```
 
 #### args parameters object
 
-The following list contains configuration properties to allow customization of the hCaptcha verification flow.
+The following list contains configuration properties to allow customization of the reCAPTCHA verification flow.
 
-| parameter | type | default | description |
-| --- | --- | --- | --- |
-| siteKey | String | | A site key from the hCaptcha [dashboard](https://dashboard.hcaptcha.com/sites), valid for any platform. |
-| locale | String | AUTO | An ISO 639-1 [language code](https://docs.hcaptcha.com/languages) to enforce a specific language. |
-| loading | Boolean | true | Show or hide the loading dialog. Android only. |
-| tokenExpiration | long | 120 | hCaptcha token expiration timeout in seconds. |
+| parameter | type | description |
+| --- | --- | --- |
+| siteKeyAndroid | String | A score-based Android key from the GCC. Required for the Android platform. |
+| siteKeyWeb | String | A score-based Website key from the GCC. Optional for the browser platform. |
 
-### onSuccess callback return values
+⚠ Keys created with the legacy [v3 Admin Console](https://www.google.com/recaptcha/admin/ "v3 Admin Console") do not work with the Enterprise API unless they are upgraded from the Google Cloud Console.
 
-- **hCaptcha response token**
+### Return values
 
-When the hCaptcha API executes the `onSuccess()` method, the user has successfully completed the CAPTCHA challenge. However, this method only indicates that the user has solved the CAPTCHA correctly. You still need to validate the user's response token from your backend server.
+- **reCAPTCHA response token**
 
-To learn how to validate the user's response token, see [Verify the User Response Server Side](https://docs.hcaptcha.com/#verify-the-user-response-server-side).
+For any type of reCAPTCHA key integration (checkbox or score), you must create an assessment from your backend by submitting the generated **token** to the assessment endpoint. reCAPTCHA processes the submitted token and reports the token's validity and score.
 
-### onFailure callback return values
-
-- When challenge is dismissed: "hCaptcha failed: Challenge Closed(30)"
-- When challenge expires: "hCaptcha failed: Session Timeout(15)"
-- When error occurs: The relevant error description is returned.
+- [Create assessments for mobile applications](https://cloud.google.com/recaptcha-enterprise/docs/create-assessment-mobile "Create assessments for mobile applications") (android platform)
+- [Create assessments for websites](https://cloud.google.com/recaptcha-enterprise/docs/create-assessment-website "Create assessments for websites") (browser platform)
 
 ### Example
 
@@ -79,35 +78,35 @@ var onSuccess = function (strToken) {
 var onFailure = function (strError) {
     console.warn(strError);
 };
-var args = {
-    siteKey: 'YOUR_SITE_KEY',
-    locale: 'es',
-    loading: true,
-    tokenExpiration: 120
-};
-cordova.plugins.Hcaptcha.verify(onSuccess, onFailure, args);
+var args = {};
+args.sitekeyAndroid = YOUR_ANDROID_KEY_ID;
+args.sitekeyWeb = YOUR_WEBSITE_KEY_ID;
+cordova.plugins.Recaptcha.verify(onSuccess, onFailure, args);
 ```
 
-# 
 # Remarks
 
-- You must verify the generated tokens from the server side to complete the verification correctly.
-- The hCaptcha params `size` and `theme` are not configurable since they are valid for the checkbox only.
-- The plugin will not render the checkbox and instead jump directly to the CAPTCHA challenge.
-- The plugin does not work on Android 4.4 because the SDK has dependencies not available in API 19.
-- On cordova-android 9.X.X and earlier the plugin requires [cordova-plugin-android-fragmentactivity](https://www.npmjs.com/package/cordova-plugin-android-fragmentactivity).
+- Score-based keys do not display the *I'm not a robot* checkbox and never show CAPTCHA challenges
+- Score-based keys return a token which you must use to create an assessment that returns a risk score.
+- You cannot use Classic keys from the[ v3 Admin Console](https://www.google.com/recaptcha/admin " v3 Admin Console").
+- The website key (optional for browser platform) should be created with the **localhost** domain.
+- On certain devices, the first call to `verify()` could return [Internal Error](https://cloud.google.com/recaptcha-enterprise/docs/reference/android/com/google/android/recaptcha/RecaptchaErrorCode#INTERNAL_ERROR "Internal Error").
 
 # Plugin demo app
 
-- [Compiled APK](https://github.com/andreszs/cordova-plugin-demos/tree/main/com.andreszs.hcaptcha.demo/apk)
+- [Compiled APK and reference](https://www.andreszsogon.com/com-andreszs-grecaptcha-demo/)
 - [Source code for www folder](https://github.com/andreszs/cordova-plugin-demos)
 
-<img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.hcaptcha.demo/screenshots/android/hcaptcha-001.png?raw=true" width="200" /> <img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.hcaptcha.demo/screenshots/android/hcaptcha-002.png?raw=true" width="200" /> <img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.hcaptcha.demo/screenshots/android/hcaptcha-003.png?raw=true" width="200" />
+#### android
+<img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.grecaptcha.demo/screenshots/android/grecaptcha-01.png?raw=true" width="200" /> <img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.grecaptcha.demo/screenshots/android/grecaptcha-02.png?raw=true" width="200" /> <img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.grecaptcha.demo/screenshots/android/grecaptcha-03.png?raw=true" width="200" />
+
+#### browser
+<img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.grecaptcha.demo/screenshots/browser/grecaptcha-01.png?raw=true" width="200" /> <img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.grecaptcha.demo/screenshots/browser/grecaptcha-02.png?raw=true" width="200" /> <img src="https://github.com/andreszs/cordova-plugin-demos/blob/main/com.andreszs.grecaptcha.demo/screenshots/browser/grecaptcha-03.png?raw=true" width="200" />
 
 # Changelog
 
-### 1.0.0
+### 1.0.1
 
 - First version
-- Tested on Android 5.1 and up
+- Tested on Android 4.4 and up
 - Tested on browser platform
